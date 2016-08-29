@@ -1,0 +1,8 @@
+This theme is created as part of an sddm implementation at UiL OTS labs of Utrecht University.
+
+This theme is inspired by the maldives theme by Abdurrahman AVCI. If to be used outside the UiL OTS it might need some cleanup and refactoring.
+
+QML files contain license headers.
+~~~
+License: Creative Commons Attribution-Share Alike 3.0 Unported
+License-URL: https://creativecommons.org/licenses/by-sa/3.0/deed.en

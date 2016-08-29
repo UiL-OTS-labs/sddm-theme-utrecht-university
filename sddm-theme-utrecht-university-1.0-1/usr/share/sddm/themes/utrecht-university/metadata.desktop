@@ -1,0 +1,16 @@
+[SddmGreeterTheme]
+Name=Utrecht-University
+Description=Utrecht University theme
+Author=Chris van Run <C.P.A.vanrun@uu.nl>
+Copyright=(c) 2016, UU
+License=CC-BY-SA
+Type=sddm-theme
+Version=1.0
+Website=http://www.uu.nl/
+Screenshot=screenshot.jpg
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=labman.gw@uu.nl
+Theme-Id=utrecht-university
+Theme-API=2.0

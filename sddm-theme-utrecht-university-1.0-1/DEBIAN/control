@@ -1,0 +1,8 @@
+Package: sddm-theme-utrecht-university
+Version: 1.0-1
+Architecture: all
+Maintainer: C.P.A. van Run <labman.gw@uu.nl>
+Depends: sddm
+Description: Theme Utrecht University
+ A theme for the simple desktop display manager (sddm; login manager).
+ Has a username AND password field.
