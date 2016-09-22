@@ -39,7 +39,7 @@ Rectangle {
   width: geometry.width
   height: geometry.height
 
-  
+
 
   readonly property string generalFontFamily: 'Oxygen'
 
@@ -48,7 +48,7 @@ Rectangle {
     cursorShape: Qt.ArrowCursor
   }
 
-  /* 
+  /*
   * Some lanuages are read left to right, for this we enable layout mirroring.
   */
   LayoutMirroring.enabled: Qt.locale().textDirection == Qt.RightToLeft
@@ -65,10 +65,10 @@ Rectangle {
   function reset()
   {
     userMessage.state = 'welcome'
-    
+
     name.text = ''
     password.text = ''
-    
+
     name.forceActiveFocus()
 
     textFields.enabled = true
@@ -142,7 +142,7 @@ Rectangle {
   Image {
     id: background
     asynchronous: true
-    
+
     anchors.fill: container
     horizontalAlignment: Image.AlignLeft; verticalAlignment: Image.AlignTop
     //fillMode: Image.PreserveAspectCrop
@@ -158,7 +158,7 @@ Rectangle {
   Image {
     id: background_overlay
     asynchronous: true
-    
+
     anchors.fill: container
     horizontalAlignment: Image.AlignLeft; verticalAlignment: Image.AlignTop
     fillMode: Image.PreserveAspectCrop
@@ -177,7 +177,7 @@ Rectangle {
 
     height: extraColumn.implicitHeight;width: extraColumn.implicitWidth
 
-    anchors { 
+    anchors {
       left: parent.left
       bottom: parent.bottom
       margins: 20
@@ -326,7 +326,7 @@ Rectangle {
 
 
 /*
-* Main box that limits the size of the main column 
+* Main box that limits the size of the main column
 */
   Rectangle {
     id: mainBox
@@ -344,17 +344,17 @@ Rectangle {
       anchors.topMargin: spacing
       anchors.bottomMargin: spacing
 
-      Label { 
+      Label {
         id: userMessage
         state: 'welcome'
         width: text.implicitWidth
         anchors.left: parent.left
-        
+
         states: [
           State {
             name: 'welcome'
-            PropertyChanges { 
-              target: userMessage; 
+            PropertyChanges {
+              target: userMessage;
               font.bold: false;
               font.family: generalFontFamily
               text: config.welcomeText
@@ -364,19 +364,19 @@ Rectangle {
           },
           State {
             name: 'message'
-            PropertyChanges { 
+            PropertyChanges {
               target: userMessage;
               font.family: generalFontFamily
-              font.bold: true; 
+              font.bold: true;
               font.pixelSize: 20;
             }
           }
         ]
       }
-      
+
       // Artsy vertical divider
       CustomVerticalLine {
-        anchors{ 
+        anchors{
           left: parent.left
           right: parent.right
         }
@@ -399,13 +399,13 @@ Rectangle {
 
         spacing: 10
 
-        anchors { 
+        anchors {
           left: parent.left
           right: parent.right
         }
-        
+
         // Username
-        Item 
+        Item
         {
           anchors.left: parent.left
           anchors.right: parent.right
@@ -437,7 +437,7 @@ Rectangle {
             Keys.onTabPressed: password.forceActiveFocus()
 
             Keys.onEnterPressed: password.forceActiveFocus()
-            Keys.onReturnPressed: 
+            Keys.onReturnPressed:
             {
               password.forceActiveFocus()
               password.selectAll()
@@ -448,7 +448,7 @@ Rectangle {
         }
 
         // Password
-        Item 
+        Item
         {
           anchors {
             left: parent.left
@@ -494,7 +494,7 @@ Rectangle {
 
       // Artsy vertical divider
       CustomVerticalLine {
-        anchors{ 
+        anchors{
           left: parent.left
           right: parent.right
         }
@@ -518,7 +518,7 @@ Rectangle {
           rebootButton.enabled = majorButtons.enabled
         }
 
-        anchors{ 
+        anchors{
           left: parent.left
           right: parent.right
         }
@@ -582,10 +582,20 @@ Rectangle {
     }
   }
 
+  //focus works in qmlscene
+  //but this seems to be needed when loaded from SDDM
+  //I don't understand why, but we have seen this before in the old lock screen
+  Timer {
+      id: resetDelayHack
+      interval: 200
+      onTriggered: reset()
+  }
+  //end hack
+
   /*
-  * After loading call reset to setup first use. 
+  * After loading call reset to setup first use.
   */
   Component.onCompleted: {
-    reset()
+    resetDelayHack.start()
   }
 }
